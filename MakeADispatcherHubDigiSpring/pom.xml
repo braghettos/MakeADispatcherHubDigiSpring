@@ -64,7 +64,7 @@
 				<configuration>
 					<path>/${project.build.finalName}</path>  
   					<update>true</update>  
-  					<url>http://192.168.1.14:8080/manager/text</url>  
+  					<url>http://makeacoffee.no-ip.org:8080/manager/text</url>  
  					<username>pi</username>
  					<password>galletto</password> 
 				</configuration>

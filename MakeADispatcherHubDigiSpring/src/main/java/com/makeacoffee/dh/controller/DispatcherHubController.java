@@ -42,17 +42,17 @@ public class DispatcherHubController {
     		if(!myLocalXBeeDevice.isOpen())
 				myLocalXBeeDevice.open();
     		
-			myLocalXBeeDevice.sendDataAsync(myRemoteXBeeDevice, eventId.getBytes());
-			
+			myLocalXBeeDevice.sendData(myRemoteXBeeDevice, eventId.getBytes());
+					
 			// Read data sent by the remote XBee device.
 			xbeeMessage = myLocalXBeeDevice.readDataFrom(myRemoteXBeeDevice);
-			
+
 			logger.info("message received from " + myRemoteXBeeDevice.get64BitAddress() + ":" + xbeeMessage.getDataString());
 			
 		} catch (XBeeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
     	
     	return xbeeMessage.getDataString();
     }
@@ -98,6 +98,13 @@ public class DispatcherHubController {
 					
 					logger.info("From cloud:" + update_stato);*/
 					
+					XBeeMessage xbeeMessageTmp = null;
+			    	
+			    	// Read data sent by the remote XBee device.
+					xbeeMessageTmp = myLocalXBeeDevice.readDataFrom(myRemoteXBeeDevice);
+
+					logger.info("message received from " + myRemoteXBeeDevice.get64BitAddress() + ":" + xbeeMessageTmp.getDataString());
+					
 					myLocalXBeeDevice.removeDataListener(this);
 						
 					logger.info("Removed MyDataReceiveListener from DispatcherHubController");
@@ -119,7 +126,7 @@ public class DispatcherHubController {
     	return dataSent;
     }
     
-	@RequestMapping("/ed/{deviceId}/status")
+	/*@RequestMapping("/ed/{deviceId}/status")
 	public void status(@PathVariable String deviceId) {
 				
 		try {
@@ -145,5 +152,5 @@ public class DispatcherHubController {
 			e.printStackTrace();
 			//myLocalXBeeDevice.close();
 		}
-	}
+	}*/
 }
